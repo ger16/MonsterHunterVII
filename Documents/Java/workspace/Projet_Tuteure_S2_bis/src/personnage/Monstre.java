@@ -29,8 +29,8 @@ public class Monstre extends PNJ{
 
 	}
 	
-	public Monstre (String nom, int PV, int PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
-		super(nom, PV, PX, initiative, attaque, esquive, defense, degats);
+	public Monstre (double x, double y, int direction, boolean moving, Animation[] animations,String nom, int PV, int PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
+		super(x,y,direction,moving,animations,nom, PV, PX, initiative, attaque, esquive, defense, degats);
 	}
 
 	public Monstre(String nom, int categorie) {

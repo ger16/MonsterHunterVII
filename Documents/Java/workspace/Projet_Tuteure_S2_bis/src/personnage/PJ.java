@@ -28,8 +28,8 @@ public class PJ extends Personnage {
 		this.PA = 6;
 	}
 	
-	public PJ(String nom,double PV, double PX, int force, int adresse, int resistance, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, List<Objets> inventaire, Equipement equipement){
-		super(nom, PV, PX,initiative, attaque, esquive, defense, degats);
+	public PJ(double x, double y, int direction, boolean moving, Animation[] animations,String nom,double PV, double PX, int force, int adresse, int resistance, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, List<Objets> inventaire, Equipement equipement){
+		super(x,y,direction,moving, animations, nom, PV, PX,initiative, attaque, esquive, defense, degats);
 		this.force = force;
 		this.adresse = adresse;
 		this.resistance = resistance;
