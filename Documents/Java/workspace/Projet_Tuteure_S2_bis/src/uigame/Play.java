@@ -34,8 +34,8 @@ public class Play extends BasicGameState {
 		joueur.setY(0);
 		monster = new PNJ();
 		joueurAnimation = new Animation[8];
-		joueurSS = new SpriteSheet(joueur.getSkin1(),64,64);
-		monsterSS = new SpriteSheet(monster.getSkin(),64,64);
+		joueurSS = new SpriteSheet("ressources/sprite/people/soldier_altcolor.png",64,64);
+		monsterSS = new SpriteSheet("ressources/sprite/monsters/bat.png",64,64);
 		//x1 y1 x2 y2 horizontaleScan duration autoUpdate
 		joueurAnimation[0] = new Animation(joueurSS, 0,0,0,0,true,100,true); //dos
 		joueurAnimation[1] = new Animation(joueurSS, 0,1,0,1,true,100,true); //gauche
@@ -59,7 +59,7 @@ public class Play extends BasicGameState {
 		//map.render(joueur.getPosX(),joueur.getPosY());
 		g.drawString("Pos du PJ x : " + joueur.getX() + " Pos du PJ en y : " + joueur.getY(), 100, 100);
 		
-		joueurAnimation[6].draw(joueur.getX(), joueur.getY());
+		joueurAnimation[6].draw((float)joueur.getX(), (float)joueur.getY());
 		//g.drawAnimation(joueurAnimation[2],joueur.getPjPosX(),joueur.getPjPosY());
 	}
 
