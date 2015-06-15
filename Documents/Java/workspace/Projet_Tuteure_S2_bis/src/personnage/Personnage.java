@@ -1,6 +1,11 @@
 package personnage;
 
 public abstract class Personnage {
+
+	protected double x,y;
+	protected int direction;
+	protected boolean moving;
+	protected Animation[] animations;
 	
 	protected String nom;
 	protected double PV;
@@ -14,6 +19,11 @@ public abstract class Personnage {
 	protected Niveaux degats;
 	
 	public Personnage(){
+		this.x = 300;
+		this.y = 300;
+		this.direction = 0;
+		this.moving = false;
+		this.animations = new Animation[8];
 		this.nom = "Innomé";
 		this.PV = 100;
 		this.PX = 0;
@@ -24,7 +34,12 @@ public abstract class Personnage {
 		this.degats = new Niveaux();
 	}
 	
-	public Personnage(String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
+	public Personnage(double x, double y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
+		this.x = x;
+		this.y = y;
+		this.direction = direction;
+		this.moving = moving;
+		this.animations = animations;
 		this.nom = nom;
 		this.PV = PV;
 		this.PX = PX;
@@ -84,6 +99,47 @@ public abstract class Personnage {
 	public Niveaux getDegats(){
 		return this.degats;
 	}
+	
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
+	public Animation[] getAnimations() {
+		return animations;
+	}
+
+	public void setAnimations(Animation[] animations) {
+		this.animations = animations;
+	}
+
 	
 	public String toString(){
 		return "Nom : " + this.nom + "\n\nPV : " + this.PV + "\n\nPX : " + this.PX +"\n\nInitiative : " + this.initiative + "\n\nAttaque : " + this.attaque + "\n\nEsquive : " + this.esquive + "\n\nDefense : " + this.defense + "\n\nDegats : " + this.degats;
