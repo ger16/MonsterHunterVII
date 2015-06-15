@@ -7,7 +7,7 @@ public class PNJ extends Personnage{
 	}
 	
 	
-	public PNJ(double x, double y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
+	public PNJ(float x, float y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
 		super(x,y,direction,moving,animations,nom, PV, PX, initiative, attaque, esquive, defense, degats);
 		
 	}

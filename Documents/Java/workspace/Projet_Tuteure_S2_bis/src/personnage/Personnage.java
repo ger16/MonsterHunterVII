@@ -2,7 +2,7 @@ package personnage;
 
 public abstract class Personnage {
 
-	protected double x,y;
+	protected float x,y;
 	protected int direction;
 	protected boolean moving;
 	protected Animation[] animations;
@@ -34,7 +34,7 @@ public abstract class Personnage {
 		this.degats = new Niveaux();
 	}
 	
-	public Personnage(double x, double y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
+	public Personnage(float x, float y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
@@ -100,19 +100,19 @@ public abstract class Personnage {
 		return this.degats;
 	}
 	
-	public double getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(double x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public double getY() {
+	public float getY() {
 		return y;
 	}
 
-	public void setY(double y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
