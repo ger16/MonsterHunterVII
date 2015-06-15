@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="11">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
+  <image source="grass.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="19" name="hole" tilewidth="32" tileheight="32">
+  <image source="hole.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="37" name="treetop" tilewidth="32" tileheight="32">
+  <image source="treetop.png" width="192" height="224"/>
+ </tileset>
+ <tileset firstgid="79" name="mountains" tilewidth="32" tileheight="32">
+  <image source="mountains.png" width="384" height="288"/>
+ </tileset>
+ <tileset firstgid="187" name="castle_outside" tilewidth="32" tileheight="32">
+  <image source="castle_outside.png" width="544" height="352"/>
+ </tileset>
+ <tileset firstgid="374" name="tuto-slick2d-037-tuile-logic" tilewidth="32" tileheight="32">
+  <image source="tuto-slick2d-037-tuile-logic.png" width="160" height="160"/>
+ </tileset>
+ <layer name="Herbe" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RMQGEQBAAset44AH/bllcTJEiCrKttX4k7OMYJwl/Hyk+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy0+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy0+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy0+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy3fxzVuEp7xAgJp2pRAnAAA
+  </data>
+ </layer>
+ <layer name="Objets" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Zu27CQBAFUH4GKBIKoAgpEgrg/3+JERWy1tnwGO9KPkeaxm5W+7oje7Fgjr6iDlHfrQfCzU/Ub9Sx9UBmaBm1ilrfPTtFnaMuTUY0bx9Rn1Gbkfel9SLPNmoXtR95X1svcg2zvLZe5JLlfZHl7cjqvuit+qK36lfpG4neqh19VTu+kfRFLvTlP7mgt2pj7F+HM5Sjts/Hclxv9brS3Nf2uRzPU5p7+3wapbNQm3v/xfM8k7elrNBHvccz91ApK/RR+R65l+RLPt+ipvfXGSjdS3Ii16NnQE7kGp6B2v6XE9Oy//ti/wMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFO6AnjBN5RAnAAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3awQ6CMBAEUPxpv9944FZEqtudhPcS7mSGbSlh27ir56P7Dti9u9gv1hrlro8+Z9nrJos++sk+h3nIoo8+ss/yTR+6ymF+ejkXZpF7H7OQ4yh7XWTTT49R7tavOmeZfvq2y29m9mm517DG9JrJXVc1ZmfhaO9mPeeOPjLOoo/1rv4ToqNaV/L1LlxrlO/sOZz/8/wDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADc1wtZps2ZQJwAAA==
+  </data>
+ </layer>
+</map>

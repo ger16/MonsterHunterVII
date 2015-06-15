@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="11">
+ <tileset firstgid="1" name="tuto-slick2d-037-tuile-logic" tilewidth="32" tileheight="32">
+  <image source="tuto-slick2d-037-tuile-logic.png" width="160" height="160"/>
+ </tileset>
+ <tileset firstgid="26" name="grass" tilewidth="32" tileheight="32">
+  <image source="grass.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="44" name="treetop" tilewidth="32" tileheight="32">
+  <image source="treetop.png" width="192" height="224"/>
+ </tileset>
+ <layer name="Herbe" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RMREAIRAAsZPCD/jXyCug3iJFFGTNzEfG/h0yfLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy0+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy0+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFR4uPFh8tPlp8tPho8dHio8VHi48WHy0+Wny0+Gjx0eKjxUeLjxYfLT5afLT4aPHR4qPFBwAAAAAAAAAALxcoEPjRQJwAAA==
+  </data>
+ </layer>
+ <layer name="Objets" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3csY4UMQyA4XsjoAAKoAAKuAIogPd/FXJCK0bGSZzs5MZ2/k9KsdnTbcaT2NJOsg8PAAAAAAAAAAAAAAAAAICsPpb2qbTPldcr+vCXFpsvpX0t7bHy+uw+7s8/Wry+lfa9tB+V12f3aWPYgTYPtXj9LO1Xab8rr8/u08awA20eavGq5Y+R/pG6IcewS/7S5qGlfsz0W/s0mfPXMd7aWrDUj5l+a581h2bRm2uW+jHTb+2z5tAsenPt6mvPvBY0nmrli9Jelvbq0NeaDzvUdZkftBit8rq0N6W9Nf595rp+I/PDaIzu8a6096V9UN7bra7fyPzQitFz2qGuR8q/O6wFbc55vUc71HVtzkWskRHHrNHmnOe8UFsHnsd8L881srYOPI95VKTcm3kd3ER6FldbB57HPCrDs7iIY67J8Cwu4pitPNdG6/PD6KLk30x5qSXKdbbyUpQ5ZREl/x7zkox/lDll0bpOr2T8o8ypUVHmmYx/hpoe+RlPhvhLkZ7xtPJolBzbY93v5EErj0bJsT3W/U4etPJolBw7w+u1tfKo1xw7Q+anq69N7i/ymj9X8fZ9u9xfVMufV49zFW/ft8v9RbX8efU4V/H+fXstf3ob5yry+p9zv+gTax66us6t1IrBqv2itc9s5aGsNUNqxeCYz8+MR+0zW3koa82QZAxm5m7N6J6pVh7atWbMzN0nvbOGvbNxo+PcxTHutRhaz3ke/9eZ6ysjy/6AkTOzvbOG966v7CzXOnJmtpdPeu+PnOXNyFLHR8/SSiPn/mfucSbWOi6NPBsaOfe/U+wt7v19Bu0967l//G/29xmO98yyz4B1MM+S04/3jFivZYkv+ccX1gQAAAAAAAAAAAAAAAAAQPoD/CPe90CcAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="100" height="100" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3a246CMBQFUPz/n57wNBPklJJpdYeulfiCBc/FFlC2DQAAAAAAAAAAgNW9im3H7dU2+r2K13HM2X7Vsc6OTZ+qfq0+Vb3rHa8/tao2rXnSqvnVca/eW93dflR1v7NO6UetqlvrXFKtRVf7blt7v9X1fI9750jPOf/Yx7Mxq+i5jvrvsXvGHcev2I+UdeHO3Hqyb+Tbew/Z2v5Un8716nzee3/5RGfXQ5/83Oq9O+OfJO36cvX7krQce36PebLUHFPjmin5O5ca10zJOSfHNktyzsmxzZKcc/JaOkt6vunxjZaeb3p8o6Xnmx7faOn5psc3WnK+zudZ9CNPenyjpeebHt9oyflar7IkxzZLcs7JsY2W/v9OcmwzpP/nlhrXLOn92KXGNcPZc4BJUuOaJaEf1bOI27ZWL3bJ/VhtbuwS+nEmLZ5PSct71Xnx1zH3b9REH359e+3Wh3etHsyqlTlxbdZcWfUZ3BHu1qoaq/bj3Fm7jtfMejBHtca0XgAAAAAAAAAAAAAAAE/0A9Ak5PNAnAAA
+  </data>
+ </layer>
+</map>
