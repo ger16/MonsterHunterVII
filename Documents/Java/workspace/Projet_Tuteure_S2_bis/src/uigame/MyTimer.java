@@ -4,67 +4,40 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import personnage.Niveaux;
-
 public class MyTimer {
 
+	public static final int PERIODE = 10;
+	
 	Timer myTimer;
 	TimerTask myTimerTask;
 	Date myDate;
 	String myDateString;
-	int j,h,m,s;
+	int s;
 	
 	public MyTimer(){
+		s = 0;
 		myTimer = new Timer();
 		myDate = new Date();
 		
 		myTimerTask = new TimerTask(){
+			
 			public void run(){
-				if (s < 59){
-					s++;
-				}
-				else if (m < 59){
-					s = 0;
-					m++;
-				}
-				else if (h < 23){
-					m = 0;
-					h++;
-				}
-				else {
-					h = 0;
-					j++;
-				}
-				
-				myDateString = "J : " + j + " H : " + h + " M : " + m + " S : " + s;
+				s += 1;
+				myDateString = "Temps : " + s;
 			}
 		};
 	}
 	
 	public MyTimer(String threadName){
-		j = 0; h = 0; m = 0; s = 0;
+		 s = 0;
 		myTimer = new Timer(threadName);
 		myDate = new Date();
 		
 		myTimerTask = new TimerTask(){
+					
 			public void run(){
-				if (s < 59){
-					s++;
-				}
-				else if (m < 59){
-					s = 0;
-					m++;
-				}
-				else if (h < 23){
-					m = 0;
-					h++;
-				}
-				else {
-					h = 0;
-					j++;
-				}
-				
-				myDateString = "J : " + j + " H : " + h + " M : " + m + " S : " + s;
+				s += 1;
+				myDateString = "Temps : " + s;
 			}
 		};
 	}
@@ -87,5 +60,13 @@ public class MyTimer {
 		while(true) {
 		System.out.println(time.getTimer());
 		}
+	}
+
+	public int getS() {
+		return s;
+	}
+
+	public void setS(int s) {
+		this.s = s;
 	}
 }

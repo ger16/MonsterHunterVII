@@ -3,15 +3,20 @@ package personnage;
 import org.newdawn.slick.Animation;
 
 import uigame.Map;
+import uigame.MyTimer;
 
 
 public abstract class Personnage {
 
+	public static final int PA_INI = 6;
+	
 	protected float x,y;
 	protected int xCoord,yCoord;
 	protected int direction;
 	protected boolean moving;
 	protected Animation[] animations;
+	protected int PA;
+	protected int DLA;
 	
 	protected String nom;
 	protected double PV;
@@ -43,6 +48,8 @@ public abstract class Personnage {
 		this.defense = new Niveaux();
 		this.degats = new Niveaux();
 		this.map = map;
+		this.PA = PA_INI;
+		this.DLA = 0;
 	}
 	
 	public Personnage(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
@@ -62,6 +69,8 @@ public abstract class Personnage {
 		this.defense = defense;
 		this.degats = degats;
 		this.map = map;
+		this.PA = PA_INI;
+		this.DLA = 0;
 	}
 	
 	//public abstract void attaquer(Personnage adversaire);
@@ -83,6 +92,14 @@ public abstract class Personnage {
 			return true;
 		}
 		return false;
+	}
+	
+	public void calcDLA(MyTimer tempsJeu){
+		if(DLA == tempsJeu.getS()){
+			this.DLA += uigame.MyTimer.PERIODE;
+			this.PA = (this.PA/2 + PA_INI) + (this.initiative.getDegres()/PA_INI); 
+		}
+		
 	}
 	
 	public void updateCoord(){

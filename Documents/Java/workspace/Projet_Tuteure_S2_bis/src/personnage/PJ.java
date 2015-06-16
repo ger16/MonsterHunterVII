@@ -17,6 +17,7 @@ import objets.MainGauche;
 import objets.Objets;
 import objets.Vetement;
 import uigame.Map;
+import uigame.MyTimer;
 
 public class PJ extends Personnage {
 
@@ -97,22 +98,20 @@ public class PJ extends Personnage {
 	}
 	
 	public void attaquer(Personnage adversaire){
-		if (this.PA > 2 && adversaire.isDead()) {
 		this.PA -= 3;
 		if(adversaire.esquive.score() < this.attaque.score()){
 			if(adversaire.defense.score() < this.degats.score()){
 				this.PX += 1;
-				int diff = this.degats.score() - this.defense.score();
-				if (diff < 0){
-					diff = 0;
+				int diff = this.degats.score() - adversaire.defense.score();
+				diff /= 3;
+				for(int i=0;i<diff;i++){
+					adversaire.PV -= 100.0/6.0;
 				}
-				adversaire.PV -= 100/6*diff;
 			}
 		}
 		if(adversaire.PV == 0){
 			double ratio = adversaire.PX/this.PX;
 			this.PX += 5 * ratio;
-		}
 		}
 	}
 	

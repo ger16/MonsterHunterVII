@@ -20,9 +20,11 @@ public class PNJ extends Personnage{
 	public void attaquer(Personnage adversaire){
 		if(adversaire.esquive.score() < this.attaque.score()){
 			if(adversaire.defense.score() < this.degats.score()){
-				int diff = this.degats.score() - this.defense.score();
+				int diff = this.degats.score() - adversaire.defense.score();
 				diff /= 3;
-				adversaire.PV -= 100/6*diff;
+				for(int i=0;i<diff;i++){
+					adversaire.PV -= 100.0/6.0;
+				}
 			}
 		}
 	}
