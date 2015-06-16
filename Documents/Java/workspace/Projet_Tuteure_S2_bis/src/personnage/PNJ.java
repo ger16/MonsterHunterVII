@@ -1,5 +1,9 @@
 package personnage;
 
+import org.newdawn.slick.Animation;
+
+import uigame.Map;
+
 public class PNJ extends Personnage{
 	
 	public PNJ(){
@@ -7,8 +11,8 @@ public class PNJ extends Personnage{
 	}
 	
 	
-	public PNJ(float x, float y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
-		super(x,y,direction,moving,animations,nom, PV, PX, initiative, attaque, esquive, defense, degats);
+	public PNJ(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
+		super(x,y,direction,moving,nom, PV, PX, initiative, attaque, esquive, defense, degats, map);
 		
 	}
 	

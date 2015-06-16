@@ -1,5 +1,10 @@
 package personnage;
 
+import org.newdawn.slick.Animation;
+
+import uigame.Map;
+
+
 public abstract class Personnage {
 
 	protected float x,y;
@@ -18,9 +23,11 @@ public abstract class Personnage {
 	protected Niveaux defense;
 	protected Niveaux degats;
 	
+	protected Map map;
+	
 	public Personnage(){
-		this.x = 300;
-		this.y = 300;
+		this.x = 0f;
+		this.y = 0f;
 		this.direction = 0;
 		this.moving = false;
 		this.animations = new Animation[8];
@@ -34,7 +41,7 @@ public abstract class Personnage {
 		this.degats = new Niveaux();
 	}
 	
-	public Personnage(float x, float y, int direction, boolean moving, Animation[] animations, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
+	public Personnage(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
@@ -48,11 +55,21 @@ public abstract class Personnage {
 		this.attaque = esquive;
 		this.defense = defense;
 		this.degats = degats;
+		this.map = map;
 	}
 	
-	public abstract void attaquer(Personnage adversaire);
-	public abstract void deplacement(int x, int y);
+	//public abstract void attaquer(Personnage adversaire);
+	//public abstract void deplacement(int x, int y);
 	
+	public Personnage(int x2, int y2, int direction2, boolean moving2, String nom2, Map map2) {
+		this.x = x2;
+		this.y = y2;
+		this.direction = direction2;
+		this.moving = moving2;
+		this.nom = nom2;
+		this.map = map2;
+	}
+
 	public void setNom(String nom){
 		this.nom = nom;
 	}

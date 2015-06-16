@@ -8,30 +8,36 @@ import org.newdawn.slick.tiled.TiledMap;
 public class Map {
 	private TiledMap tiledMap;
 	
+	public Map(){
+		
+	}
+	
 	public void init() throws SlickException {
 		this.tiledMap = new TiledMap("ressources/map/map.tmx");
 	}
 	
 	public void renderBackground() {
-		tiledMap.render(0, 0, 0);
+		tiledMap.render(-500, -500, 0);
 	}
 	
+	
 	public void renderForeground() {
-		tiledMap.render(0,0,1);
-		tiledMap.render(0,0,2);
+		tiledMap.render(-500,-500,1);
+		tiledMap.render(-500,-500,2);
 	}
 	
 	public boolean isCollision(float x, float y) {
 		int tileW = this.tiledMap.getTileWidth();
 		int tileH = this.tiledMap.getTileHeight();
 		
-		int Collisions = this.tiledMap.getLayerIndex("Collisions");
-		Image tile = this.tiledMap.getTileImage((int) x/tileW, (int)y/tileH, Collisions);
+		int collisionsInt = this.tiledMap.getLayerIndex("Collisions");
+		System.out.println(collisionsInt);
+		Image tile = this.tiledMap.getTileImage((int) x / tileW, (int) y / tileH, collisionsInt);
 		boolean collision = tile != null;
 		
 		if(collision) {
 			Color color = tile.getColor((int)x, (int)y);
-			collision = color.getAlpha() > 0;
+			collision = color.getAlpha() > 0.5;
 		}
 		
 		return collision;
@@ -59,6 +65,14 @@ public class Map {
 	}
 	public String getObjectProperty(int objectID, String propertyName, String def) {
 	    return this.tiledMap.getObjectProperty(0, objectID, propertyName, def);
+	}
+
+	public TiledMap getTiledMap() {
+		return tiledMap;
+	}
+
+	public void setTiledMap(TiledMap tiledMap) {
+		this.tiledMap = tiledMap;
 	}
 	
 	

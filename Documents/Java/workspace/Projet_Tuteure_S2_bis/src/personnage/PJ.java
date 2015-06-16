@@ -3,11 +3,20 @@ package personnage;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
+
+
+
 import objets.MainDroite;
 import objets.Equipement;
 import objets.MainGauche;
 import objets.Objets;
 import objets.Vetement;
+import uigame.Map;
 
 public class PJ extends Personnage {
 
@@ -17,6 +26,7 @@ public class PJ extends Personnage {
 	private List<Objets> inventaire;
 	private Equipement equipement;
 	private int PA;
+	private float mvt = 64;
 	
 	public PJ() {
 		super();
@@ -28,8 +38,8 @@ public class PJ extends Personnage {
 		this.PA = 6;
 	}
 	
-	public PJ(float x, float y, int direction, boolean moving, Animation[] animations,String nom,double PV, double PX, int force, int adresse, int resistance, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, List<Objets> inventaire, Equipement equipement){
-		super(x,y,direction,moving, animations, nom, PV, PX,initiative, attaque, esquive, defense, degats);
+	public PJ(float x, float y, int direction, boolean moving, String nom,double PV, double PX, int force, int adresse, int resistance, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, List<Objets> inventaire, Equipement equipement, Map map){
+		super(x,y,direction,moving, nom, PV, PX,initiative, attaque, esquive, defense, degats, map);
 		this.force = force;
 		this.adresse = adresse;
 		this.resistance = resistance;
@@ -38,6 +48,10 @@ public class PJ extends Personnage {
 		this.PA = 6;
 	}
 	
+	public PJ(int x, int y,int direction , boolean moving, String nom, Map map) {
+		super(x,y,direction,moving,nom,map);
+	}
+
 	public Niveaux calcEncombrementTotal(){
 		Niveaux encombrementTotal = new Niveaux();
 		int x, y;
@@ -124,8 +138,52 @@ public class PJ extends Personnage {
 		}
 	}
 	
-	public void deplacement(int x, int y){
+	public void deplacement(float x, float y){
 		this.PA -= 2;
+	}
+	
+	// skin et animation du personnae
+	
+	public void init() throws SlickException {
+		SpriteSheet spriteSheet = new SpriteSheet("ressources/sprite/people/soldier_altcolor.png",64,64);
+		animations[0] = new Animation(spriteSheet, 0,0,0,0,true,100,true); //nord
+		animations[1] = new Animation(spriteSheet, 0,1,0,1,true,100,true); //ouest
+		animations[2] = new Animation(spriteSheet, 0,2,0,2,true,100,true); //sud
+		animations[3] = new Animation(spriteSheet, 0,3,0,3,true,100,true); //est
+		animations[4] = new Animation(spriteSheet, 1,0,8,0,true,100,true); //mvt nord
+		animations[5] = new Animation(spriteSheet, 1,1,8,1,true,100,true); //mvt ouest
+		animations[6] = new Animation(spriteSheet, 1,2,8,2,true,100,true); //mvt sud
+		animations[7] = new Animation(spriteSheet, 1,3,8,3,true,100,true); //mvt est
+	}
+	
+	public void render(Graphics g) throws SlickException {
+		g.setColor(new Color(0,0,0,.5f));
+		g.fillOval(this.x - 16, this.y - 8, 32, 16);
+		g.drawAnimation(animations[this.direction],this.x -32,this.y-60);
+	}
+	
+	public void update() throws SlickException {
+		boolean collision;
+		float futurX = this.x;
+		float futurY = this.y;
+		
+		if (this.moving){
+			switch (this.direction){
+				case 4: futurY = futurY + mvt; //haut
+				case 5: futurX = futurX - mvt; //gauche
+				case 6: futurY = futurY - mvt; //bas
+				case 7: futurX = futurX + mvt; //droite
+				this.moving = false;
+			}
+		}
+		
+		//collision = this.map.isCollision(futurX, futurY);
+		collision = false;
+		
+		if (collision){
+			this.x = futurX;
+			this.y = futurY;
+		}
 	}
 	
 	public void setForce(int force){
@@ -192,6 +250,9 @@ public class PJ extends Personnage {
 	}
 	public int getPA(){
 		return this.PA;
+	}
+	public Animation getAnimations(int i){
+		return this.animations[i];
 	}
 
 	public String toString(){

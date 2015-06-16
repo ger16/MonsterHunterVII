@@ -1,6 +1,18 @@
 package personnage;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
+
+import uigame.Map;
+
+
+
 public class Monstre extends PNJ{
+	
+	boolean isDead = false;
 	
 	public static final int CATEGORIE_1 = 1;
 	public static final int CATEGORIE_2 = 2;
@@ -29,8 +41,8 @@ public class Monstre extends PNJ{
 
 	}
 	
-	public Monstre (float x, float y, int direction, boolean moving, Animation[] animations,String nom, int PV, int PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats){
-		super(x,y,direction,moving,animations,nom, PV, PX, initiative, attaque, esquive, defense, degats);
+	public Monstre (float x, float y, int direction, boolean moving,String nom, int PV, int PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
+		super(x,y,direction,moving,nom, PV, PX, initiative, attaque, esquive, defense, degats, map);
 	}
 
 	public Monstre(String nom, int categorie) {
@@ -116,4 +128,53 @@ public class Monstre extends PNJ{
 		}
 	}
 	
+	public void init() throws SlickException {
+		SpriteSheet spriteSheet = new SpriteSheet("ressources/sprite/monsters/bat.png",32,32);
+		//x1 y1 x2 y2 horizontaleScan duration autoUpdate
+		this.x = 128;
+		this.y = 0;
+		animations[0] = new Animation(spriteSheet, 0,0,2,1,true,100,true); //nord
+		animations[1] = new Animation(spriteSheet, 0,1,2,1,true,100,true); //ouest
+		animations[2] = new Animation(spriteSheet, 0,2,2,1,true,100,true); //sud
+		animations[3] = new Animation(spriteSheet, 0,3,2,1,true,100,true); //est
+	}
+	
+	public void render(Graphics g) throws SlickException {
+		if (isDead == false){
+		g.setColor(new Color(5,0,0,.5f));
+		g.fillOval(this.x, this.y, 32, 16);
+		g.drawAnimation(animations[this.direction],this.x -32,this.y-60);
+		}
+		else{
+			g.setColor(new Color(0,0,0,0.5f));
+			g.drawString("DEAD", this.x, this.x);
+		}
+	}
+	
+	public void update() throws SlickException {
+		boolean collision;
+		if (PV <= 0){
+			isDead = true;
+		}
+		float futurX = this.x;
+		float futurY = this.y;
+		
+		if (this.moving){
+			switch (this.direction){
+				case 4: futurY = futurY ;//+ mvt; //haut
+				case 5: futurX = futurX ;//- mvt; //gauche
+				case 6: futurY = futurY ;//- mvt; //bas
+				case 7: futurX = futurX ;//+ mvt; //droite
+				this.moving = false;
+			}
+		}
+		
+		//collision = this.map.isCollision(futurX, futurY);
+		collision = false;
+		
+		if (collision){
+			this.x = futurX;
+			this.y = futurY;
+		}
+	}
 }
