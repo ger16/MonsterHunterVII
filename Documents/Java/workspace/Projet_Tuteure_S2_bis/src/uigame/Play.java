@@ -20,11 +20,11 @@ public class Play extends BasicGameState {
 	private int yMousePos;
 	private Niveaux n = new Niveaux();
 	private Map map = new Map();
-	private PJ joueur = new PJ();
-	private Monstre monster = new Monstre();
+	private PJ joueur = new PJ(map);
+	private Monstre monster = new Monstre(map);
 	private boolean musicOFF;
 	private Music music2;
-	private Camera camera = new Camera(joueur);
+	private Camera camera = new Camera(joueur,map);
 	private PlayerController controller;
 	private Hud hud = new Hud();
 	
@@ -40,6 +40,12 @@ public class Play extends BasicGameState {
 		this.monster.init();
 		controller = new PlayerController(joueur,monster,gc);
 		hud.init();
+		this.joueur.setX(64f);
+		this.joueur.setY(64f);
+		this.joueur.setPA(100);
+		this.joueur.setAttaque(new Niveaux(100));
+		this.monster.setX(128f);
+		this.monster.setY(64f);
 		
 		//monsterSS = new SpriteSheet("ressources/sprite/monsters/bat.png",64,64);
 		
@@ -57,10 +63,12 @@ public class Play extends BasicGameState {
 		//map.render(gc.getWidth() / 2 - (int) this.joueur.getPosX(), gc.getHeight() / 2 - (int)this.joueur.getPosY());
 		//map.render(this.joueur.getX(),this.joueur.getY());
 		//map.render(joueur.getPosX(),joueur.getPosY());
+		g.setColor(new Color(0,0,0,.5f));
 		g.drawString("Pos du PJ x : " + joueur.getX() + " Pos du PJ en y : " + joueur.getY(), joueur.getX(), joueur.getY());
 		AfficheMousePos(g);
 		
 		hud.render(g);
+		joueur.renderStatic(g);
 		//g.drawAnimation(joueurAnimation[2],joueur.getPjPosX(),joueur.getPjPosY());
 	}
 
@@ -80,9 +88,9 @@ public class Play extends BasicGameState {
 		yMousePos = Mouse.getY();
 		xMousePos = Mouse.getX();
 		
-		mouse = "mouse position x : " + xMousePos + " y : " + yMousePos;
+		mouse = "mouse position x : " + xMousePos + " y : " + yMousePos + " yPlacement : " + (768-yMousePos);
 		g.drawString(mouse, joueur.getX(), joueur.getY()+200);
-		g.drawString(camera.getxCamera() + "  " + camera.getyCamera(), joueur.getX(), joueur.getY());
+		//g.drawString(camera.getxCamera() + "  " + camera.getyCamera(), joueur.getX(), joueur.getY());
 	}
 	
 	private void drawCase(Graphics g, GameContainer gc){

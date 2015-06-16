@@ -12,7 +12,6 @@ import uigame.Map;
 
 public class Monstre extends PNJ{
 	
-	boolean isDead = false;
 	
 	public static final int CATEGORIE_1 = 1;
 	public static final int CATEGORIE_2 = 2;
@@ -36,8 +35,8 @@ public class Monstre extends PNJ{
 	public static final Niveaux NIVEAUX_CATEGORIE_9 = new Niveaux(54);
 	public static final Niveaux NIVEAUX_CATEGORIE_10 = new Niveaux(60);
 	
-	public Monstre() {
-		super();
+	public Monstre(Map map) {
+		super(map);
 
 	}
 	
@@ -45,7 +44,8 @@ public class Monstre extends PNJ{
 		super(x,y,direction,moving,nom, PV, PX, initiative, attaque, esquive, defense, degats, map);
 	}
 
-	public Monstre(String nom, int categorie) {
+	public Monstre(String nom, int categorie, Map map) {
+		super(map);
 		this.PV = 100;
 		switch (categorie){
 		case 1 :
@@ -140,22 +140,18 @@ public class Monstre extends PNJ{
 	}
 	
 	public void render(Graphics g) throws SlickException {
-		if (isDead == false){
-		g.setColor(new Color(5,0,0,.5f));
-		g.fillOval(this.x, this.y, 32, 16);
-		g.drawAnimation(animations[this.direction],this.x -32,this.y-60);
+		if (this.isDead() == false){
+		g.drawAnimation(animations[this.direction],this.x-16,this.y-32);
 		}
 		else{
-			g.setColor(new Color(0,0,0,0.5f));
-			g.drawString("DEAD", this.x, this.x);
+			g.setColor(new Color(0,0,0,1f));
+			g.drawString("DEAD", this.x-16, this.y-32);
 		}
 	}
 	
 	public void update() throws SlickException {
 		boolean collision;
-		if (PV <= 0){
-			isDead = true;
-		}
+		this.isDead();
 		float futurX = this.x;
 		float futurY = this.y;
 		

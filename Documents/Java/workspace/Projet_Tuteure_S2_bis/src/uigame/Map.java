@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Map {
+	int val = 0;
 	private TiledMap tiledMap;
 	
 	public Map(){
@@ -13,33 +14,50 @@ public class Map {
 	}
 	
 	public void init() throws SlickException {
-		this.tiledMap = new TiledMap("ressources/map/map.tmx");
+		this.tiledMap = new TiledMap("ressources/map/exemple-collision.tmx");
 	}
 	
 	public void renderBackground() {
-		tiledMap.render(-500, -500, 0);
+		tiledMap.render(val,val,0);
+		tiledMap.render(val,val,1);
+		tiledMap.render(val,val,2);
 	}
 	
 	
 	public void renderForeground() {
-		tiledMap.render(-500,-500,1);
-		tiledMap.render(-500,-500,2);
+		tiledMap.render(val,val,3);
+		tiledMap.render(val,val,4);
+		//tiledMap.render(val,val,5);
 	}
 	
 	public boolean isCollision(float x, float y) {
+		
 		int tileW = this.tiledMap.getTileWidth();
 		int tileH = this.tiledMap.getTileHeight();
-		
-		int collisionsInt = this.tiledMap.getLayerIndex("Collisions");
-		System.out.println(collisionsInt);
-		Image tile = this.tiledMap.getTileImage((int) x / tileW, (int) y / tileH, collisionsInt);
+		int collisionID = this.tiledMap.getLayerIndex("logic");
+		int collisionInt = this.tiledMap.getTileId(0, 0, collisionID);
+		int actualInt = this.tiledMap.getTileId((int) x / tileW, (int) y / tileH, collisionID);
+		System.out.println("coordTile X : " + (int)x/tileW + " coordTile Y : " +(int)y/tileH );
+		boolean collision = false;
+		if (actualInt != 0){
+			return true;
+		}
+		/*for (int i = actualInt; i < actualInt+16; i++){
+			if (i == actualInt){
+				return true;
+			}
+		}*/
+		/*Image tile = this.tiledMap.getTileImage((int) x / tileW, (int) y / tileH, collisionsInt);
 		boolean collision = tile != null;
 		
 		if(collision) {
 			Color color = tile.getColor((int)x, (int)y);
 			collision = color.getAlpha() > 0.5;
-		}
-		
+			collision = this.tiledMap.getTileId((int) x / tileW, (int) y / tileH, collisionsInt) == collisionsInt;
+		}*/
+		System.out.println(collisionInt);
+		System.out.println(actualInt);
+		System.out.println(collision);
 		return collision;
 	}
 	

@@ -20,16 +20,18 @@ import uigame.Map;
 
 public class PJ extends Personnage {
 
+	private static final int PA_X = 530;
+	private static final int PA_Y = 513;
 	private int force ;
 	private int adresse;
 	private int resistance;
 	private List<Objets> inventaire;
 	private Equipement equipement;
 	private int PA;
-	private float mvt = 64;
+	private float mvt = 32;
 	
-	public PJ() {
-		super();
+	public PJ(Map map) {
+		super(map);
 		this.force = 0;
 		this.adresse = 0;
 		this.resistance = 0;
@@ -93,17 +95,22 @@ public class PJ extends Personnage {
 	}
 	
 	public void attaquer(Personnage adversaire){
+		if (this.PA > 2 && adversaire.isDead()) {
 		this.PA -= 3;
 		if(adversaire.esquive.score() < this.attaque.score()){
 			if(adversaire.defense.score() < this.degats.score()){
 				this.PX += 1;
 				int diff = this.degats.score() - this.defense.score();
+				if (diff < 0){
+					diff = 0;
+				}
 				adversaire.PV -= 100/6*diff;
 			}
 		}
 		if(adversaire.PV == 0){
 			double ratio = adversaire.PX/this.PX;
 			this.PX += 5 * ratio;
+		}
 		}
 	}
 	
@@ -159,31 +166,46 @@ public class PJ extends Personnage {
 	public void render(Graphics g) throws SlickException {
 		g.setColor(new Color(0,0,0,.5f));
 		g.fillOval(this.x - 16, this.y - 8, 32, 16);
-		g.drawAnimation(animations[this.direction],this.x -32,this.y-60);
+		g.drawAnimation(animations[this.direction],this.x-32,this.y-60);
+	}
+	
+	public void renderStatic(Graphics g) throws SlickException {
+		g.resetTransform();
+		g.setColor(new Color(Color.black));
+		g.drawString("PA : " + this.PA, PA_X, PA_Y);
 	}
 	
 	public void update() throws SlickException {
-		boolean collision;
 		float futurX = this.x;
 		float futurY = this.y;
+		boolean collision;
 		
 		if (this.moving){
-			switch (this.direction){
-				case 4: futurY = futurY + mvt; //haut
-				case 5: futurX = futurX - mvt; //gauche
-				case 6: futurY = futurY - mvt; //bas
-				case 7: futurX = futurX + mvt; //droite
+			
+			if (this.direction == 4){
+				futurY = futurY - mvt; //haut
+			}
+			else if (this.direction == 5){
+				futurX = futurX - mvt; //gauche
+			}
+			else if (this.direction == 6) {
+				futurY = futurY + mvt; //bas
+			}
+			else if (this.direction == 7){
+				futurX = futurX + mvt; //droite
+				this.moving = false;
+			}
+		
+			collision = this.map.isCollision(futurX, futurY);
+			
+			if (!collision){
+				this.x = futurX;
+				this.y = futurY;
 				this.moving = false;
 			}
 		}
 		
-		//collision = this.map.isCollision(futurX, futurY);
-		collision = false;
-		
-		if (collision){
-			this.x = futurX;
-			this.y = futurY;
-		}
+
 	}
 	
 	public void setForce(int force){

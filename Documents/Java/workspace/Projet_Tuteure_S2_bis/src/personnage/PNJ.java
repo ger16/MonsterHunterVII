@@ -6,8 +6,9 @@ import uigame.Map;
 
 public class PNJ extends Personnage{
 	
-	public PNJ(){
-		super();
+	
+	public PNJ(Map map){
+		super(map);
 	}
 	
 	

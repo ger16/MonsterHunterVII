@@ -8,14 +8,16 @@ import personnage.Personnage;
 
 public class Camera {
 	
-	 private PJ player = new PJ();
+	Map map;
+	 private PJ player = new PJ(map);
 	 private float xCamera = 0; 
 	 private float yCamera = 0;
 	 
-	 public Camera(PJ player){
+	 public Camera(PJ player, Map map){
 		 this.player = player;
 		 this.xCamera = player.getX();
 		 this.yCamera = player.getY();
+		 this.map = map;
 	 }
 	 
 	 public void affichage(GameContainer gc, Graphics g) {

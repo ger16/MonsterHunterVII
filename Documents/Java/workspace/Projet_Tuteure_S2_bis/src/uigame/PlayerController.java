@@ -69,25 +69,21 @@ public class PlayerController implements MouseListener {
 		if(input.isMousePressed(0)){
 				if (mouseZoneInput(x,y,new Point(44,244), new Point(143,223))){
 					player.setMoving(true);
-					player.setY(player.getY()-32);
 					player.setDirection(4);
 				}
 				//Est
 				if (mouseZoneInput(x,y,new Point(44,194), new Point(143,173))){
 					player.setMoving(true);
-					player.setX(player.getX()+32);
 					player.setDirection(7);
 				}
 				//Ouest
 				if (mouseZoneInput(x,y,new Point(44,143), new Point(143,122))){
 					player.setMoving(true);
-					player.setX(player.getX()-32);
 					player.setDirection(5);
 				}
 				//Sud
 				if (mouseZoneInput(x,y,new Point(44,92), new Point(143,73))){
 					player.setMoving(true);
-					player.setY(player.getY()+32);
 					player.setDirection(6);
 				}
 				

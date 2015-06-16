@@ -25,7 +25,7 @@ public abstract class Personnage {
 	
 	protected Map map;
 	
-	public Personnage(){
+	public Personnage(Map map){
 		this.x = 0f;
 		this.y = 0f;
 		this.direction = 0;
@@ -39,6 +39,7 @@ public abstract class Personnage {
 		this.esquive = new Niveaux();
 		this.defense = new Niveaux();
 		this.degats = new Niveaux();
+		this.map = map;
 	}
 	
 	public Personnage(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
@@ -68,6 +69,13 @@ public abstract class Personnage {
 		this.moving = moving2;
 		this.nom = nom2;
 		this.map = map2;
+	}
+	
+	public boolean isDead(){
+		if (this.PV <= 0){
+			return true;
+		}
+		return false;
 	}
 
 	public void setNom(String nom){
