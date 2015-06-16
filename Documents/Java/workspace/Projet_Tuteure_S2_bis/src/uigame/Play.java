@@ -90,6 +90,7 @@ public class Play extends BasicGameState {
 		
 		mouse = "mouse position x : " + xMousePos + " y : " + yMousePos + " yPlacement : " + (768-yMousePos);
 		g.drawString(mouse, joueur.getX(), joueur.getY()+200);
+		g.drawString("CoordX : " + joueur.getxCoord() + " CoordY : " + joueur.getyCoord(), joueur.getX(), joueur.getY()+300);
 		//g.drawString(camera.getxCamera() + "  " + camera.getyCamera(), joueur.getX(), joueur.getY());
 	}
 	

@@ -150,6 +150,7 @@ public class Monstre extends PNJ{
 	}
 	
 	public void update() throws SlickException {
+		this.updateCoord();
 		boolean collision;
 		this.isDead();
 		float futurX = this.x;

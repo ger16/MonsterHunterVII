@@ -8,6 +8,7 @@ import uigame.Map;
 public abstract class Personnage {
 
 	protected float x,y;
+	protected int xCoord,yCoord;
 	protected int direction;
 	protected boolean moving;
 	protected Animation[] animations;
@@ -28,6 +29,8 @@ public abstract class Personnage {
 	public Personnage(Map map){
 		this.x = 0f;
 		this.y = 0f;
+		this.xCoord= 0;
+		this.yCoord = 0;
 		this.direction = 0;
 		this.moving = false;
 		this.animations = new Animation[8];
@@ -45,6 +48,8 @@ public abstract class Personnage {
 	public Personnage(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
 		this.x = x;
 		this.y = y;
+		this.xCoord = 0;
+		this.yCoord = 0;
 		this.direction = direction;
 		this.moving = moving;
 		this.animations = animations;
@@ -69,6 +74,8 @@ public abstract class Personnage {
 		this.moving = moving2;
 		this.nom = nom2;
 		this.map = map2;
+		this.xCoord = 0;
+		this.yCoord = 0;
 	}
 	
 	public boolean isDead(){
@@ -76,6 +83,11 @@ public abstract class Personnage {
 			return true;
 		}
 		return false;
+	}
+	
+	public void updateCoord(){
+		this.xCoord = (int)this.x / map.getTiledMap().getWidth();
+		this.yCoord = (int)this.y /map.getTiledMap().getHeight();
 	}
 
 	public void setNom(String nom){
@@ -233,5 +245,21 @@ public abstract class Personnage {
 		} else if (!nom.equals(other.nom))
 			return false;
 		return true;
+	}
+
+	public int getxCoord() {
+		return xCoord;
+	}
+
+	public void setxCoord(int xCoord) {
+		this.xCoord = xCoord;
+	}
+
+	public int getyCoord() {
+		return yCoord;
+	}
+
+	public void setyCoord(int yCoord) {
+		this.yCoord = yCoord;
 	}
 }

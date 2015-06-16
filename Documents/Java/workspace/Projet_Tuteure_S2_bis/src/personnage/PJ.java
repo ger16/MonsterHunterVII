@@ -42,6 +42,8 @@ public class PJ extends Personnage {
 	
 	public PJ(float x, float y, int direction, boolean moving, String nom,double PV, double PX, int force, int adresse, int resistance, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, List<Objets> inventaire, Equipement equipement, Map map){
 		super(x,y,direction,moving, nom, PV, PX,initiative, attaque, esquive, defense, degats, map);
+		this.xCoord = (int)this.x / map.getTiledMap().getWidth();
+		this.yCoord = (int)this.y /map.getTiledMap().getHeight();
 		this.force = force;
 		this.adresse = adresse;
 		this.resistance = resistance;
@@ -176,6 +178,7 @@ public class PJ extends Personnage {
 	}
 	
 	public void update() throws SlickException {
+		this.updateCoord();
 		float futurX = this.x;
 		float futurY = this.y;
 		boolean collision;
