@@ -14,13 +14,13 @@ public abstract class Personnage {
 	protected int xCoord,yCoord;
 	protected int direction;
 	protected boolean moving;
-	protected Animation[] animations;
-	protected int PA;
-	protected int DLA;
+	protected Animation animations[];
 	
 	protected String nom;
 	protected double PV;
 	protected double PX;
+	protected int PA;
+	protected int DLA;
 	
 	
 	protected Niveaux initiative;
@@ -48,8 +48,7 @@ public abstract class Personnage {
 		this.defense = new Niveaux();
 		this.degats = new Niveaux();
 		this.map = map;
-		this.PA = PA_INI;
-		this.DLA = 0;
+		this.DLA = 10;
 	}
 	
 	public Personnage(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
@@ -69,7 +68,6 @@ public abstract class Personnage {
 		this.defense = defense;
 		this.degats = degats;
 		this.map = map;
-		this.PA = PA_INI;
 		this.DLA = 0;
 	}
 	
@@ -92,14 +90,6 @@ public abstract class Personnage {
 			return true;
 		}
 		return false;
-	}
-	
-	public void calcDLA(MyTimer tempsJeu){
-		if(DLA == tempsJeu.getS()){
-			this.DLA += uigame.MyTimer.PERIODE;
-			this.PA = (this.PA/2 + PA_INI) + (this.initiative.getDegres()/PA_INI); 
-		}
-		
 	}
 	
 	public void updateCoord(){
@@ -186,8 +176,8 @@ public abstract class Personnage {
 		this.moving = moving;
 	}
 
-	public Animation[] getAnimations() {
-		return animations;
+	public Animation getAnimations(int i) {
+		return animations[i];
 	}
 
 	public void setAnimations(Animation[] animations) {
@@ -278,5 +268,25 @@ public abstract class Personnage {
 
 	public void setyCoord(int yCoord) {
 		this.yCoord = yCoord;
+	}
+
+	public int getPA() {
+		return PA;
+	}
+
+	public void setPA(int pA) {
+		PA = pA;
+	}
+
+	public static int getPaIni() {
+		return PA_INI;
+	}
+
+	public int getDLA() {
+		return DLA;
+	}
+
+	public void setDLA(int dLA) {
+		DLA = dLA;
 	}
 }

@@ -3,6 +3,7 @@ package personnage;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -12,6 +13,8 @@ import uigame.Map;
 
 public class Monstre extends PNJ{
 	
+	String skin;
+	Image barPV;
 	
 	public static final int CATEGORIE_1 = 1;
 	public static final int CATEGORIE_2 = 2;
@@ -47,6 +50,7 @@ public class Monstre extends PNJ{
 	public Monstre(String nom, int categorie, Map map) {
 		super(map);
 		this.PV = 100;
+		this.skin = "ressources/sprite/monsters/bat.png";
 		switch (categorie){
 		case 1 :
 			this.PX = 100;
@@ -129,7 +133,7 @@ public class Monstre extends PNJ{
 	}
 	
 	public void init() throws SlickException {
-		SpriteSheet spriteSheet = new SpriteSheet("ressources/sprite/monsters/bat.png",32,32);
+		SpriteSheet spriteSheet = new SpriteSheet(skin,32,32);
 		//x1 y1 x2 y2 horizontaleScan duration autoUpdate
 		this.x = 128;
 		this.y = 0;
@@ -137,16 +141,6 @@ public class Monstre extends PNJ{
 		animations[1] = new Animation(spriteSheet, 0,1,2,1,true,100,true); //ouest
 		animations[2] = new Animation(spriteSheet, 0,2,2,1,true,100,true); //sud
 		animations[3] = new Animation(spriteSheet, 0,3,2,1,true,100,true); //est
-	}
-	
-	public void render(Graphics g) throws SlickException {
-		if (this.isDead() == false){
-		g.drawAnimation(animations[this.direction],this.x-16,this.y-32);
-		}
-		else{
-			g.setColor(new Color(0,0,0,1f));
-			g.drawString("DEAD", this.x-16, this.y-32);
-		}
 	}
 	
 	public void update() throws SlickException {
@@ -173,5 +167,29 @@ public class Monstre extends PNJ{
 			this.x = futurX;
 			this.y = futurY;
 		}
+	}
+
+	public String getSkin() {
+		return skin;
+	}
+
+	public void setSkin(String skin) {
+		this.skin = skin;
+	}
+
+	public void setAnimations(Animation animation, Animation animation2, Animation animation3, Animation animation4) {
+		this.animations[0] = animation;
+		this.animations[1] = animation2;
+		this.animations[2] = animation3;
+		this.animations[3] = animation4;
+		
+	}
+
+	public Image getBarPV() {
+		return barPV;
+	}
+
+	public void setBarPV(Image barPV) {
+		this.barPV = barPV;
 	}
 }

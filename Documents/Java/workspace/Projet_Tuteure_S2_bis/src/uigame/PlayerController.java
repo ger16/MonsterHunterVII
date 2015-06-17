@@ -11,12 +11,12 @@ import personnage.Personnage;
 public class PlayerController implements MouseListener {
 	
 	private PJ player;
-	private Monstre monster;
+	private Monstre monsterTab[];
 	private Input input;
 	
-	public PlayerController(PJ player, Monstre monster, GameContainer gc){
+	public PlayerController(PJ player, Monstre monsterTab[], GameContainer gc){
 		this.player = player;
-		this.monster = monster;
+		this.monsterTab = monsterTab;
 		input = gc.getInput();
 	}
 	
@@ -67,31 +67,68 @@ public class PlayerController implements MouseListener {
 	public void mousePressed(int button, int x, int y) {
 				//Nord
 		if(input.isMousePressed(0)){
-				if (mouseZoneInput(x,y,new Point(44,244), new Point(143,223))){
+				if (mouseZoneInput(x,y,new Point(125,225), new Point(222,201))){
+					if (player.getPA() >= 2){
+					player.deplacement();
 					player.setMoving(true);
 					player.setDirection(4);
+					}
 				}
 				//Est
-				if (mouseZoneInput(x,y,new Point(44,194), new Point(143,173))){
-					player.setMoving(true);
-					player.setDirection(7);
+				if (mouseZoneInput(x,y,new Point(216,153), new Point(312,132))){
+					if (player.getPA() >= 2){
+						player.deplacement();
+						player.setMoving(true);
+						player.setDirection(7);
+						}
+					
 				}
 				//Ouest
-				if (mouseZoneInput(x,y,new Point(44,143), new Point(143,122))){
-					player.setMoving(true);
-					player.setDirection(5);
+				if (mouseZoneInput(x,y,new Point(44,153), new Point(143,132))){
+					if (player.getPA() >= 2){
+						player.deplacement();
+						player.setMoving(true);
+						player.setDirection(5);
+						}
+					
 				}
 				//Sud
-				if (mouseZoneInput(x,y,new Point(44,92), new Point(143,73))){
-					player.setMoving(true);
-					player.setDirection(6);
+				if (mouseZoneInput(x,y,new Point(123,83), new Point(224,62))){
+					if (player.getPA() >= 2){
+						player.deplacement();
+						player.setMoving(true);
+						player.setDirection(6);
+						}
+					
 				}
 				
 				
 				//Attack
-				if (mouseZoneInput(x,y,new Point(275,200), new Point(360,100))){
-					player.attaquer(monster);
-					System.out.println(monster.getPV());
+				if (mouseZoneInput(x,y,new Point(294,93), new Point(378,9))){
+					for (int i =0; i<monsterTab.length;i++){
+						player.attaquer(monsterTab[i]);
+					}
+				}
+				
+				if (mouseZoneInput(x,y,new Point(430,230), new Point(495,190))){
+					if (player.getPalier() > 0){
+					player.setForce(player.getForce()+1);
+					player.setPalier(player.getPalier()-1);
+					}
+				}
+				
+				if (mouseZoneInput(x,y,new Point(430,150), new Point(495,110))){
+					if (player.getPalier() > 0){
+					player.setAdresse(player.getAdresse()+1);
+					player.setPalier(player.getPalier()-1);
+					}
+				}
+				
+				if (mouseZoneInput(x,y,new Point(430,70), new Point(495,30))){
+					if (player.getPalier() > 0){
+					player.setResistance(player.getResistance()+1);
+					player.setPalier(player.getPalier()-1);
+					}
 				}
 		}
 	}

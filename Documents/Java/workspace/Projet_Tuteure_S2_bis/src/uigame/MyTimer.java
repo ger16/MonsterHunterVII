@@ -4,7 +4,13 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.newdawn.slick.Graphics;
+
+import com.sun.prism.paint.Color;
+
 public class MyTimer {
+	
+
 
 	public static final int PERIODE = 10;
 	
@@ -24,6 +30,7 @@ public class MyTimer {
 			public void run(){
 				s += 1;
 				myDateString = "Temps : " + s;
+				
 			}
 		};
 	}
@@ -53,14 +60,14 @@ public class MyTimer {
 		return myDateString;
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MyTimer time = new MyTimer("threadsd");
 		time.time();
 		while(true) {
 		System.out.println(time.getTimer());
 		}
-	}
+	}*/
 
 	public int getS() {
 		return s;

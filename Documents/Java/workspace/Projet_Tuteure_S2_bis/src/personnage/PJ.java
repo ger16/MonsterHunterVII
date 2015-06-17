@@ -11,13 +11,13 @@ import org.newdawn.slick.SpriteSheet;
 
 
 
+
 import objets.MainDroite;
 import objets.Equipement;
 import objets.MainGauche;
 import objets.Objets;
 import objets.Vetement;
 import uigame.Map;
-import uigame.MyTimer;
 
 public class PJ extends Personnage {
 
@@ -30,6 +30,8 @@ public class PJ extends Personnage {
 	private Equipement equipement;
 	private int PA;
 	private float mvt = 32;
+	private int palier = 0;
+	private int varPalier = 100;
 	
 	public PJ(Map map) {
 		super(map);
@@ -98,6 +100,7 @@ public class PJ extends Personnage {
 	}
 	
 	public void attaquer(Personnage adversaire){
+		if (this.PA > 2 && !(adversaire.isDead()) && aPortee(adversaire)) {
 		this.PA -= 3;
 		if(adversaire.esquive.score() < this.attaque.score()){
 			if(adversaire.defense.score() < this.degats.score()){
@@ -107,12 +110,29 @@ public class PJ extends Personnage {
 				for(int i=0;i<diff;i++){
 					adversaire.PV -= 100.0/6.0;
 				}
+				adversaire.PV -= 100/6*diff;
+				if (adversaire.isDead()){
+					double ratio = adversaire.PX/this.PX;
+					this.PX += 5 * ratio;
+				}
 			}
 		}
-		if(adversaire.PV == 0){
-			double ratio = adversaire.PX/this.PX;
-			this.PX += 5 * ratio;
+		
 		}
+	}
+	
+	public boolean aPortee(Personnage adversaire){
+		int portee = this.getEquipement().getMainD().getPortee();
+		
+		for (int i = 0; i<=portee; i++){
+			if ((this.xCoord +i == adversaire.xCoord && this.yCoord == adversaire.yCoord)||
+				(this.xCoord == adversaire.xCoord && this.yCoord + i == adversaire.yCoord)||
+				(this.xCoord -i == adversaire.xCoord && this.yCoord == adversaire.yCoord)||
+				(this.xCoord == adversaire.xCoord && this.yCoord - i == adversaire.yCoord)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public String niveauBlessure(){
@@ -146,13 +166,21 @@ public class PJ extends Personnage {
 		}
 	}
 	
-	public void deplacement(float x, float y){
-		this.PA -= 2;
+	public void deplacement(){
+		if (this.PA >= 2){
+			this.PA -= 2;
+		}
 	}
 	
 	// skin et animation du personnae
 	
 	public void init() throws SlickException {
+		
+		//this.force = 10;
+		//this.adresse = 10;
+		//this.resistance = 10;
+		this.palier = 30;
+		
 		SpriteSheet spriteSheet = new SpriteSheet("ressources/sprite/people/soldier_altcolor.png",64,64);
 		animations[0] = new Animation(spriteSheet, 0,0,0,0,true,100,true); //nord
 		animations[1] = new Animation(spriteSheet, 0,1,0,1,true,100,true); //ouest
@@ -174,10 +202,13 @@ public class PJ extends Personnage {
 		g.resetTransform();
 		g.setColor(new Color(Color.black));
 		g.drawString("PA : " + this.PA, PA_X, PA_Y);
+		g.drawString("EXP : " + (int)this.PX, PA_X, PA_Y+50);
+		g.drawString("Degrés : " + this.palier, PA_X, PA_Y+25);
 	}
 	
 	public void update() throws SlickException {
 		this.updateCoord();
+		this.calcCapacites();
 		float futurX = this.x;
 		float futurY = this.y;
 		boolean collision;
@@ -208,6 +239,18 @@ public class PJ extends Personnage {
 		}
 		
 
+	}
+	
+	public boolean isUP(){
+
+		if (this.PX >= varPalier) {
+			varPalier = varPalier + 100;
+			palier = palier + 3;
+			if (palier > 0){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void setForce(int force){
@@ -323,5 +366,13 @@ public class PJ extends Personnage {
 		if (resistance != other.resistance)
 			return false;
 		return true;
+	}
+
+	public int getPalier() {
+		return palier;
+	}
+
+	public void setPalier(int palier) {
+		this.palier = palier;
 	}
 }
