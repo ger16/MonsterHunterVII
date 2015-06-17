@@ -18,8 +18,9 @@ public class PNJ extends Personnage{
 	}
 	
 	public void attaquer(Personnage adversaire){
-		if (this.PA > 2 && !(adversaire.isDead()) && aPortee(adversaire)) {
-		this.PA -= 3;
+		this.updateCoord();
+		if (/*this.PA > 2 &&*/ !(adversaire.isDead()) && aPortee(adversaire)) {
+		/*this.PA -= 3;*/
 		if(adversaire.esquive.score() < this.attaque.score()){
 			if(adversaire.defense.score() < this.degats.score()){
 				this.PX += 1;
@@ -39,9 +40,15 @@ public class PNJ extends Personnage{
 	}
 	
 	public boolean aPortee(Personnage adversaire){
-		int portee = 1;
-		if (this.xCoord <= adversaire.xCoord + portee && this.xCoord >= adversaire.xCoord && this.yCoord <= adversaire.yCoord && this.yCoord >= adversaire.yCoord){
-			return true;
+		int portee = 0;
+		
+		for (int i = 0; i<=portee; i++){
+			if ((this.xCoord +i == adversaire.xCoord && this.yCoord == adversaire.yCoord)||
+				(this.xCoord == adversaire.xCoord && this.yCoord + i == adversaire.yCoord)||
+				(this.xCoord -i == adversaire.xCoord && this.yCoord == adversaire.yCoord)||
+				(this.xCoord == adversaire.xCoord && this.yCoord - i == adversaire.yCoord)){
+				return true;
+			}
 		}
 		return false;
 	}

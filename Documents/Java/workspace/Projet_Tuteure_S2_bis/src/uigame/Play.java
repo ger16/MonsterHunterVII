@@ -28,6 +28,8 @@ public class Play extends BasicGameState {
 	private Map map = new Map();
 	private PJ joueur = new PJ(map);
 	private MyTimer timer;
+	int frequenceAtkMob = 2;
+	
 	
 	private Monstre monsterTab[] = {new Monstre("Batman",1,map),new Monstre("Batman2",1,map),new Monstre("Batman3",1,map),
 									new Monstre("Batman4",1,map),new Monstre("Batman5",1,map),new Monstre("Slime",1,map),
@@ -189,6 +191,11 @@ public class Play extends BasicGameState {
 	
 	public void monsterTabUpdate(Monstre monsterTab[], MyTimer time){
 		for (int i = 0; i<monsterTab.length; i++){
+
+			/*if ( timer.s == frequenceAtkMob){
+				frequenceAtkMob = frequenceAtkMob+2;
+				monsterTab[i].attaquer(joueur);
+			}*/
 		monsterTab[i].updateCoord();
 		calcDLA(timer,monsterTab[i]);
 		boolean collision;
