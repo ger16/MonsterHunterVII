@@ -13,6 +13,7 @@ public class PlayerController implements MouseListener {
 	private PJ player;
 	private Monstre monsterTab[];
 	private Input input;
+	int var = 0;
 	
 	public PlayerController(PJ player, Monstre monsterTab[], GameContainer gc){
 		this.player = player;
@@ -106,10 +107,20 @@ public class PlayerController implements MouseListener {
 				//Attack
 				if (mouseZoneInput(x,y,new Point(294,93), new Point(378,9))){
 					for (int i =0; i<monsterTab.length;i++){
-						player.attaquer(monsterTab[i]);
+						if (player.attaquer(monsterTab[i]) && var == 0){
+						player.setDirection(8);
+						var++;
+						}
+						else {
+							if (player.attaquer(monsterTab[i]) && var >0){
+								player.setDirection(10);
+								var=0;
+							}
+						}
 					}
 				}
 				
+				//Stats
 				if (mouseZoneInput(x,y,new Point(430,230), new Point(495,190))){
 					if (player.getPalier() > 0){
 					player.setForce(player.getForce()+1);

@@ -8,7 +8,7 @@ import uigame.MyTimer;
 
 public abstract class Personnage {
 
-	public static final int PA_INI = 6;
+	public static final int PA_INI = 30;
 	
 	protected float x,y;
 	protected int xCoord,yCoord;
@@ -20,6 +20,7 @@ public abstract class Personnage {
 	protected double PV;
 	protected double PX;
 	protected int PA;
+	protected int PA_MAX;
 	protected int DLA;
 	
 	
@@ -38,7 +39,7 @@ public abstract class Personnage {
 		this.yCoord = 0;
 		this.direction = 0;
 		this.moving = false;
-		this.animations = new Animation[8];
+		this.animations = new Animation[64];
 		this.nom = "Innomé";
 		this.PV = 100;
 		this.PX = 0;
@@ -49,6 +50,7 @@ public abstract class Personnage {
 		this.degats = new Niveaux();
 		this.map = map;
 		this.DLA = 10;
+		this.PA_MAX = PA;
 	}
 	
 	public Personnage(float x, float y, int direction, boolean moving, String nom, double PV, double PX, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, Map map){
@@ -95,6 +97,9 @@ public abstract class Personnage {
 	public void updateCoord(){
 		this.xCoord = (int)this.x / map.getTiledMap().getWidth();
 		this.yCoord = (int)this.y /map.getTiledMap().getHeight();
+		if (PA > PA_MAX){
+			PA_MAX = PA;
+		}
 	}
 
 	public void setNom(String nom){
@@ -288,5 +293,13 @@ public abstract class Personnage {
 
 	public void setDLA(int dLA) {
 		DLA = dLA;
+	}
+
+	public int getPA_MAX() {
+		return PA_MAX;
+	}
+
+	public void setPA_MAX(int pA_MAX) {
+		PA_MAX = pA_MAX;
 	}
 }

@@ -59,13 +59,11 @@ public class Play extends BasicGameState {
 		hud.init();
 		this.joueur.setX(64f);
 		this.joueur.setY(64f);
-		this.joueur.setPA(100);
 		
 		this.joueur.setEquipement(equipement);
 		this.equipement.setMainD(md);
 		this.md.setPortee(1);
 		
-		//monsterSS = new SpriteSheet("ressources/sprite/monsters/bat.png",64,64);
 		
 	}
 
@@ -228,7 +226,7 @@ public class Play extends BasicGameState {
 			//g.resetTransform();
 			if (!monsterTab[i].isDead()){
 			g.setColor(new Color(Color.green));
-			g.drawString("EXP : " + monsterTab[i].getPX(), monsterTab[i].getX(), monsterTab[i].getY());
+			g.drawString("LVL : " + (int)(monsterTab[i].getPX()/100), monsterTab[i].getX()-10, monsterTab[i].getY()+30);
 			}
 		}
 	
@@ -238,14 +236,8 @@ public class Play extends BasicGameState {
 		
 		if(tempsJeu.getS() == p.getDLA()){
 			//this.DLA += uigame.MyTimer.PERIODE;
-			if (p.getPA() <= 66 ){
-			p.setPA(p.getPA()/2 + p.getPA()+1);//+ (this.initiative.getDegres()/PA_INI);
+			p.setPA(p.getPA() + Personnage.getPaIni() + p.getPA()/2);//+ (this.initiative.getDegres()/PA_INI);
 			p.setDLA(p.getDLA() + 10);
-			}
-			else {
-				p.setPA(100);
-				p.setDLA(p.getDLA()+10);
-			}
 		}
 		
 		

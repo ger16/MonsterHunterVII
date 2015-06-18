@@ -31,7 +31,7 @@ public class PJ extends Personnage {
 	private int PA;
 	private float mvt = 32;
 	private int palier = 0;
-	private int varPalier = 100;
+	private int varPalier = 50;
 	
 	public PJ(Map map) {
 		super(map);
@@ -40,7 +40,8 @@ public class PJ extends Personnage {
 		this.resistance = 0;
 		this.inventaire = new ArrayList<Objets>();
 		this.equipement = new Equipement();
-		this.PA = 6;
+		this.PA = PA_INI;
+		this.PA_MAX = PA;
 	}
 	
 	public PJ(float x, float y, int direction, boolean moving, String nom,double PV, double PX, int force, int adresse, int resistance, Niveaux initiative, Niveaux attaque, Niveaux esquive, Niveaux defense, Niveaux degats, List<Objets> inventaire, Equipement equipement, Map map){
@@ -99,7 +100,7 @@ public class PJ extends Personnage {
 		this.degats.setUA(forceN.getUA() + this.equipement.getMainD().getImpactArme().getUA());
 	}
 	
-	public void attaquer(Personnage adversaire){
+	public boolean attaquer(Personnage adversaire){
 		if (this.PA > 2 && !(adversaire.isDead()) && aPortee(adversaire)) {
 		this.PA -= 3;
 		if(adversaire.esquive.score() < this.attaque.score()){
@@ -117,8 +118,9 @@ public class PJ extends Personnage {
 				}
 			}
 		}
-		
+		return true;
 		}
+		return false;
 	}
 	
 	public boolean aPortee(Personnage adversaire){
@@ -179,8 +181,8 @@ public class PJ extends Personnage {
 		//this.force = 10;
 		//this.adresse = 10;
 		//this.resistance = 10;
-		this.palier = 30;
-		
+		this.palier = 18;
+		//x1 y1 x2 y2 horizontaleScan duration autoUpdate
 		SpriteSheet spriteSheet = new SpriteSheet("ressources/sprite/people/soldier_altcolor.png",64,64);
 		animations[0] = new Animation(spriteSheet, 0,0,0,0,true,100,true); //nord
 		animations[1] = new Animation(spriteSheet, 0,1,0,1,true,100,true); //ouest
@@ -190,6 +192,11 @@ public class PJ extends Personnage {
 		animations[5] = new Animation(spriteSheet, 1,1,8,1,true,100,true); //mvt ouest
 		animations[6] = new Animation(spriteSheet, 1,2,8,2,true,100,true); //mvt sud
 		animations[7] = new Animation(spriteSheet, 1,3,8,3,true,100,true); //mvt est
+		SpriteSheet spriteSheet2 = new SpriteSheet("ressources/sprite/people/attack.png",74,64);
+		animations[8] = new Animation(spriteSheet2, 0,1,2,1,true,100,true);
+		animations[9] = new Animation(spriteSheet2, 0,2,2,2,true,100,true);
+		animations[10] = new Animation(spriteSheet2, 0,4,2,4,true,100,true);
+		animations[11] = new Animation(spriteSheet2, 0,5,2,5,true,100,true);
 	}
 	
 	public void render(Graphics g) throws SlickException {
@@ -207,6 +214,9 @@ public class PJ extends Personnage {
 	}
 	
 	public void update() throws SlickException {
+		if (this.PA > this.PA_MAX) {
+			PA_MAX = PA;
+		}
 		this.updateCoord();
 		this.calcCapacites();
 		float futurX = this.x;
@@ -244,7 +254,7 @@ public class PJ extends Personnage {
 	public boolean isUP(){
 
 		if (this.PX >= varPalier) {
-			varPalier = varPalier + 100;
+			varPalier = varPalier + 50;
 			palier = palier + 3;
 			if (palier > 0){
 				return true;

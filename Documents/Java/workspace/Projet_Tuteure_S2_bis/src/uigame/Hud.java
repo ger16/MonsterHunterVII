@@ -92,7 +92,7 @@ public class Hud {
 		g.setColor(LIFE_COLOR);
 		g.fillRect(BAR_X+188, BAR_Y+166, ((float)player.getPV()/100) * BAR_WIDTH, BAR_HEIGHT);
 		g.setColor(MANA_COLOR);
-		g.fillRect(BAR_X+188, BAR_Y+187, ((float)player.getPA()/100) * BAR_WIDTH, BAR_HEIGHT);
+		g.fillRect(BAR_X+188, BAR_Y+187, ((float)player.getPA()/(float)player.getPA_MAX()) * BAR_WIDTH, BAR_HEIGHT);
 		g.setColor(XP_COLOR);
 		g.fillRect(BAR_X+188, BAR_Y+207, (((float)player.getPX()%100)/100) * BAR_WIDTH, BAR_HEIGHT);
 		
